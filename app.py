@@ -29,11 +29,11 @@ def get_stock_price(symbol):
 
     p2.line(aapl_dates, aapl_avg, legend_label='avg', color='navy')
     p2.legend.location = "top_left"
+    st.bokeh_chart(p2)
 
-    curdoc().add_root(column(p2))
 def main():
     #Setup plot
-    name = st.text_input("Enter Stock Name (required)")
+    name = st.sidebar.text_input("Enter Stock Name (required)")
     get_stock_price(name)
     
 
