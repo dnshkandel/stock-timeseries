@@ -1,3 +1,4 @@
+import OS
 import numpy as np
 from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot
@@ -6,6 +7,7 @@ from bokeh.embed import components
 import streamlit as st
 
 def get_stock_price(symbol):
+    API_KEY= os.environ.get('API_KEY')
     ts = TimeSeries(key=API_KEY, output_format='pandas')
     data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
     aapl = np.array(data['5. adjusted close'])
