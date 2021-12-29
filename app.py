@@ -1,4 +1,4 @@
-import OS
+import os
 import numpy as np
 from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot
