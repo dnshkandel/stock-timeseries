@@ -6,13 +6,15 @@ from bokeh.plotting import figure, curdoc
 from bokeh.embed import components 
 import streamlit as st
 
-def get_stock_price(symbol):
+def get_stock_price(symbol, start_year, end_year):
     API_KEY= os.getenv("API_KEY", "optional-default")
     ts = TimeSeries(key=API_KEY, output_format='pandas')
     data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
     aapl = np.array(data['5. adjusted close'])
     aapl_dates = np.array(data.index, dtype=np.datetime64)
-
+    year = pd.DatetimeIndex(data.index).year
+    inds = np.where(np.logical_and(year>=start_year, year<=end_year))
+    filtered_dates, filtered_prices = aapl_dates[inds], aapl[inds]
     window_size = 4
     window = np.ones(window_size)/float(window_size)
     aapl_avg = np.convolve(aapl, window, 'same')
@@ -27,14 +29,16 @@ def get_stock_price(symbol):
     p2.scatter(aapl_dates, aapl, size=4, legend_label='close',
                color='darkgrey', alpha=0.8)
 
-    p2.line(aapl_dates, aapl_avg, legend_label='avg', color='navy')
+    p2.line(aapl_dates[2:], aapl_avg[inds][2:], legend_label='avg', color='navy')
     p2.legend.location = "top_left"
     st.bokeh_chart(p2)
 
 def main():
     #Setup plot
     name = st.sidebar.text_input("Enter Stock Name (required)")
-    get_stock_price(name)
+    start_year = st.sidebar.number_input("Start year")
+    end_year = st.sidebar.number_input("End year")
+    get_stock_price(name, start_year, end_year)
     
 
 if __name__ == '__main__':
