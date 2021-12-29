@@ -2,6 +2,9 @@ import numpy as np
 from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, show
+from bokeh.embed import components 
+from flask import Flask, render_template
+
 
 def get_stock_price(symbol):
     ts = TimeSeries(key=API_KEY, output_format='pandas')
@@ -26,5 +29,15 @@ def get_stock_price(symbol):
     p2.line(aapl_dates, aapl_avg, legend_label='avg', color='navy')
     p2.legend.location = "top_left"
 
-    show(gridplot([[p2]]))  # open a browser
+    #show(gridplot([[p2]]))  
+    return p2
+@app.route('/')
+def homepage():
+    #Setup plot    
+    p = get_plot(get_stock_price('AAPL))
+    script, div = components(p)
+    #Render the page
+    return render_template('home.html', script=script, div=div)    
 
+if __name__ == '__main__':
+    app.run(debug=False) #Set to false when deploying
