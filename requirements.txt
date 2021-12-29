@@ -6,4 +6,4 @@ altair
 bokeh
 requests
 alpha_vantage
-matplotlib.pyplot
+matplotlib
