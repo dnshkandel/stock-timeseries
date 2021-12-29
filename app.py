@@ -7,7 +7,7 @@ from bokeh.embed import components
 import streamlit as st
 
 def get_stock_price(symbol):
-    API_KEY= os.environ.get('API_KEY')
+    API_KEY= os.getenv("API_KEY", "optional-default")
     ts = TimeSeries(key=API_KEY, output_format='pandas')
     data, meta_data = ts.get_weekly_adjusted(symbol=symbol)
     aapl = np.array(data['5. adjusted close'])
