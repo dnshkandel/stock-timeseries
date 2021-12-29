@@ -33,7 +33,7 @@ def get_stock_price(symbol):
 def main():
     #Setup plot
     name = st.text_input("Enter Stock Name (required)")
-    get_plot(get_stock_price(name))
+    get_stock_price(name)
     
 
 if __name__ == '__main__':
