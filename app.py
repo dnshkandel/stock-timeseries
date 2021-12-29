@@ -36,7 +36,7 @@ def get_stock_price(symbol):
 @app.route('/')
 def homepage():
     #Setup plot    
-    p = get_plot(get_stock_price('AAPL))
+    p = get_plot(get_stock_price('AAPL'))
     script, div = components(p)
     #Render the page
     return render_template('home.html', script=script, div=div)    
