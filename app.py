@@ -31,7 +31,7 @@ def get_stock_price(symbol):
     p2.line(aapl_dates, aapl_avg, legend_label='avg', color='navy')
     p2.legend.location = "top_left"
 
-    st.pyplot(p2)
+    show(gridplot([[p2]]))
 
 def main():
     #Setup plot
