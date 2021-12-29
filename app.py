@@ -4,6 +4,7 @@ from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, show
 from bokeh.embed import components 
+import matplotlib.pyplot as plt
 import streamlit as st
 
 def get_stock_price(symbol):
