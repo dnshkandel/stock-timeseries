@@ -2,7 +2,7 @@ import os
 import numpy as np
 from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot
-from bokeh.plotting import figure, show
+from bokeh.plotting import figure, curdoc
 from bokeh.embed import components 
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -31,8 +31,7 @@ def get_stock_price(symbol):
     p2.line(aapl_dates, aapl_avg, legend_label='avg', color='navy')
     p2.legend.location = "top_left"
 
-    show(gridplot([[p2]]))
-
+    curdoc().add_root(column(p2))
 def main():
     #Setup plot
     name = st.text_input("Enter Stock Name (required)")
