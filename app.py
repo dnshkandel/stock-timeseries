@@ -5,6 +5,8 @@ from bokeh.plotting import figure, show
 from bokeh.embed import components 
 from flask import Flask, render_template
 
+#Connect the app
+app = Flask(__name__)
 
 def get_stock_price(symbol):
     ts = TimeSeries(key=API_KEY, output_format='pandas')
