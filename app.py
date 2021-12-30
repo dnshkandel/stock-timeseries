@@ -29,7 +29,7 @@ def get_stock_price(symbol, start_year, end_year):
     p2.scatter(filtered_dates, filtered_prices, size=4, legend_label='close',
                color='darkgrey', alpha=0.8)
 
-    p2.line(filtered_dates, aapl_avg[inds][2:], legend_label='avg', color='navy')
+    p2.line(filtered_dates[2:], aapl_avg[inds][2:], legend_label='avg', color='navy')
     p2.legend.location = "top_left"
     st.bokeh_chart(p2)
 
