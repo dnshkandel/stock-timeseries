@@ -6,7 +6,7 @@ from bokeh.layouts import gridplot, column
 from bokeh.plotting import figure, curdoc
 from bokeh.embed import components 
 import streamlit as st
-st.set_page_config(page_title='Your Stock Finder', layout = 'wide', initial_sidebar_state = 'auto')
+st.title('Your Stock Finder')
 def get_stock_price(symbol, start_year, end_year):
     API_KEY= os.getenv("API_KEY", "optional-default")
     ts = TimeSeries(key=API_KEY, output_format='pandas')
