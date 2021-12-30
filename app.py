@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 import numpy as np
 from alpha_vantage.timeseries import TimeSeries
 from bokeh.layouts import gridplot, column
@@ -18,7 +19,6 @@ def get_stock_price(symbol, start_year, end_year):
     window_size = 4
     window = np.ones(window_size)/float(window_size)
     aapl_avg = np.convolve(aapl, window, 'same')
-
     p2 = figure(x_axis_type="datetime", title=symbol+ " Weekly data with One-Month Average")
     p2.grid.grid_line_alpha = 0
     p2.xaxis.axis_label = 'Date'
@@ -35,9 +35,9 @@ def get_stock_price(symbol, start_year, end_year):
 
 def main():
     #Setup plot
-    name = st.sidebar.text_input("Enter Stock Name (required)")
-    start_year = st.sidebar.number_input("Start year")
-    end_year = st.sidebar.number_input("End year")
+    name = st.sidebar.text_input("Stock Name", 'AAPL')
+    start_year = st.sidebar.number_input("Start year", 2012)
+    end_year = st.sidebar.number_input("End year", 2021)
     get_stock_price(name, start_year, end_year)
     
 
